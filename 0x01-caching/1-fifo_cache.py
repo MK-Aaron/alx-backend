@@ -14,13 +14,15 @@ class FIFOCache(BaseCaching):
     """
 
     def __init__(self):
+        """initialize the FIFO cache"""
         super().__init__()
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
+        """Add an item in the cache using vivo"""
         if key is None or item is None:
             return
-        
+
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             first_key, _ = self.cache_data.popitem(last=False)
             print(f"Discard: {first_key}")
@@ -31,4 +33,3 @@ class FIFOCache(BaseCaching):
         """return the value in 'self.cache_data' linked to 'key'
         """
         return self.cache_data.get(key, None)
-    
